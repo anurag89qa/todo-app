@@ -5,6 +5,7 @@ import * as React from 'react'
 import AddTodo from '../containers/AddTodo'
 import Todos from '../containers/Todos';
 import * as style from './App.scss'
+import {VISIBILITY_FILTER} from "./TodoItems/TodoList";
 
 class App extends React.Component {
     public render() {
@@ -21,7 +22,7 @@ class App extends React.Component {
                    <AddTodo/>
                  </div>
                  <div>
-                    <Todos/>
+                    <Todos filter={VISIBILITY_FILTER.ALL} />
                  </div>
             </div>
         );

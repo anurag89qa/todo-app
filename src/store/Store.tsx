@@ -1,7 +1,7 @@
 import {applyMiddleware, compose, createStore} from 'redux'
 import logs from 'redux-logger'
 
-import { reducer, State } from '../reducers'
+import reducer from '../reducers/index'
 
 const store = createStore(reducer, applyMiddleware(logs));
 

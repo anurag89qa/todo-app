@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux'
-import * as fromTodos from './Todo'
+import todos, {State} from './todos'
 
-export interface State {
-    todos: fromTodos.State
+
+export interface Todo {
+    id: number;
+    name: string;
+    done: boolean
+    completed:boolean;
 }
 
-export const initialState: State = {
-    todos: fromTodos.initialState,
-}
+const reducer = combineReducers<State>({
+    todos
+});
 
-export const reducer = combineReducers<State>({
-    todos: fromTodos.reducer,
-})
+export default reducer;

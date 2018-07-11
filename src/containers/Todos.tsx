@@ -1,15 +1,14 @@
 import { connect } from 'react-redux'
-import { MarkDone } from '../actions/todos'
+import {markDone, State} from '../reducers/todos'
 import TodosList from '../components/TodoItems/TodoList'
-import { State } from '../reducers'
 import { getTodos } from '../selectors/todos'
 
 const mapStateToProps = (state: State) => ({
-  todos: getTodos(state),
+    ...state
 })
 
 const mapDispatchToProps = {
-    Clicked: MarkDone,
+    Clicked: markDone,
 }
 
 export default connect<any, any, any>(mapStateToProps, mapDispatchToProps)(TodosList)

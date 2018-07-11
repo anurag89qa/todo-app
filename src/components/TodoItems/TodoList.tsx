@@ -13,14 +13,19 @@ export interface Todo {
     id: number;
     name: string;
     done: boolean
+    completed:boolean;
 }
 
+export enum VISIBILITY_FILTER { ALL, ACTIVE, COMPLETED };
+
 interface Props {
-    todos: Todo[],
+    todos: Todo[]
     Clicked: (todoId: number) => void
     handleDelete: (todoId: number) => void
+    filter: VISIBILITY_FILTER
 }
 interface State {
+
 }
 
 export default class TodoList extends React.Component<Props, State> {
@@ -32,14 +37,29 @@ export default class TodoList extends React.Component<Props, State> {
     public handleDelete(id: number) {
         console.log("Times")
     }
+
     public render() {
-        const { todos= [], Clicked, handleDelete } = this.props
+        const { todos, filter, Clicked } = this.props;
+        console.log(todos);
+        console.log(filter);
+        const filteredTodo = todos.filter((todo) => {
+            if(filter === VISIBILITY_FILTER.ALL) {
+                return true;
+            }
+            else if(filter === VISIBILITY_FILTER.ACTIVE) {
+                return !todo.completed;
+            }
+            else if(filter === VISIBILITY_FILTER.COMPLETED) {
+                return todo.completed;
+            }
+        });
         const date = moment().format("MMM Do YYYY h:mm a");
+        console.log(filteredTodo)
         return (
             <div className="data-container">
                 <ul>
                     {
-                        todos.map(todo => (
+                        filteredTodo.map(todo => (
                             <div key={todo.id}
                                  onClick={() => Clicked(todo.id)}
                                  style={{ textDecoration: `${todo.done ? 'line-through' : ''}` }}>
